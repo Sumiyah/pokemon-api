@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useEffect, useState } from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
   const [Pokemons, setPokemons] = useState([])
@@ -10,12 +11,11 @@ function App() {
 
   const getPokemons = () => {
     console.log('in get pokemon fx')
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=807').then(response => {
-      return response.json();
-    }).then(response => {
+    axios.get('https://pokeapi.co/api/v2/pokemon?limit=807')
+    .then(response => {
       console.log(response);
-      console.log(response.results);
-      setPokemons(response.results)
+      console.log(response.data.results);
+      setPokemons(response.data.results)
     })
       .catch(err => console.log(err))
   }
@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <div className="row ">
         <div className="bg-dark p-3 col-12 mb-5">
-        <img className="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png"/>
+        <img className="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png" alt="Pokemon"/>
         </div>
       </div>
         <div className="row justify-content-center">
